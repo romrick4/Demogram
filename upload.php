@@ -10,7 +10,7 @@
           <h2>Upload Photos</h2>
           <?php			
 			//if they DID upload a file...
-			if($_FILES['photo']['name'])
+			if(isset($_FILES['photo']['name']))
 			{
 				//if no errors...
 				if(!$_FILES['photo']['error'])
