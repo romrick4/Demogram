@@ -77,7 +77,12 @@
 			-->
           </ul>
 		  <ul class="navbar-form navbar-right">
+			<?php if(isset($_SESSION['user'])) : ?>
+			<li><a href="signout.php" class="btn btn-success">Sign out <?php echo $_SESSION['user']->user_first_name; ?></a></li>
+			<?php else : ?>
 			<li><a href="signin.php" class="btn btn-success">Sign in</a></li>
+			<?php endif; ?>
+			
 		  </ul>
 		  <ul class="navbar-form navbar-right">
 			<li><a href="upload.php" class="btn btn-warning">Upload</a></li>
