@@ -83,11 +83,11 @@
 			if(isset($_SESSION['user'])){
 		echo print_r($_SESSION['user'], true);
 		}
-		if(function_exists("password_verify")){
+		/*if(function_exists("password_verify")){
 			echo "function exists";
 		}else{
 			echo "Function does not exist";
-		}
+		}*/
 			?>
 		</pre>
       <form method="post" class="form-signin" role="form">
