@@ -59,7 +59,9 @@
 
                             if($result){
                                 $photo_id = $db->insertid();
-
+                                    if(!file_exists($photo_path)){
+                                        mkdir($photo_path);
+                                    }
                                 //move it to where we want it to be
                                 move_uploaded_file($_FILES['photo']['tmp_name'], $photo_path . $photo_id . '_' . $new_file_name);
                                 $_SESSION['message'] = '';
