@@ -14,10 +14,28 @@
 			unset($_SESSION["message"]);
 			}
 			?>
-			
-			<?php foreach (glob("uploads/*.jpg") as $filename) : ?>
-				<img class="img-thumbnail" src="<?php echo $filename; ?>" style="width: 200px"/>
-			<?php endforeach; ?>
+			<?php
+
+                $query = $db->getQuery(true);
+
+                $query->select("p.*, CONCAT(p.photo_id, '_', p.photo_name) real_photo_name");
+                $query->from('#__photos p');
+                $query->order('p.photo_id DESC');
+
+                $db->setQuery($query);
+
+                try{
+                    $photos = $db->loadObjectList();
+                } catch (Exception $e) {
+                    die();
+                }
+
+            ?>
+            <?php if (!empty($photos)) : ?>
+			    <?php foreach ($photos as $photo) : ?>
+				    <img class="img-thumbnail" src="<?php echo $photo->photo_path . $photo->real_photo_name; ?>" style="width: 500px"/>
+			    <?php endforeach; ?>
+            <?php endif; ?>
         </div>
         <div class="col-md-2">
 			<?php include 'include_ads_right.php'; ?>

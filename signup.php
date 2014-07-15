@@ -1,20 +1,35 @@
 <?php
 	session_start();
 	require "code/vendor/autoload.php";
+    require "code/includes/database.php";
 	$post = $_POST;
 	
-	$options = array('driver' => 'mysqli',
-					'host' => 'localhost',
-					'user' => 'root',
-					'password' => '',
-					'database' => 'demogram',
-					'prefix' => ''
-					);
+
 				
 			if(isset($_POST['firstname'], $_POST['lastname'], $_POST['username'], $_POST['email'], $_POST['password'], $_POST['confirm_password'])){
-				$db = \Joomla\Database\DatabaseDriver::getInstance($options);
+
 				
-				
+				if(strlen($_POST['password']) < 6){
+                    $_SESSION['message'] = '';
+                    $_SESSION['message'] .= '<div class="alert alert-danger" role="alert">';
+                    $_SESSION['message'] .= '<strong>Error!</strong> Your password must be at least 6 characters long';
+                    $_SESSION['message'] .= '</div>';
+                        if(isset($_SESSION["message"]))
+                        {
+                            echo $_SESSION["message"];
+                            unset($_SESSION["message"]);
+                        }
+                }elseif($_POST['password'] != $_POST['confirm_password']){
+                    $_SESSION['message'] = '';
+                    $_SESSION['message'] .= '<div class="alert alert-danger" role="alert">';
+                    $_SESSION['message'] .= '<strong>Error!</strong> Your passwords do not match.';
+                    $_SESSION['message'] .= '</div>';
+                    if(isset($_SESSION["message"]))
+                    {
+                        echo $_SESSION["message"];
+                        unset($_SESSION["message"]);
+                    }
+                }else{
 				
 				 $hash_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 				
@@ -36,11 +51,17 @@
 					if($result){
 						$user_id = $db->insertid();
 						$_SESSION['logged_in_status'] = 1;
+                        header('Location: index.php');
+                        $_SESSION['message'] = '';
+                        $_SESSION['message'] .= '<div class="alert alert-success" role="alert">';
+                        $_SESSION['message'] .= '<strong>Congratulations!</strong> Your account was successfully created. Please sign in.';
+                        $_SESSION['message'] .= '</div>';
 					}
 				} catch(RuntimeException $e){
 					$e->getCode() . ' ' . $e->getMessage();
 				}
-				echo print_r($db);
+              }
+				//echo print_r($db);
 				
 			}	
 				
@@ -79,15 +100,7 @@
   <body>
 
     <div class="container">
-		<pre><?php
-		echo print_r($post, true);
-		if(function_exists("password_verify")){
-			echo "function exists";
-		}else{
-			echo "Function does not exist";
-		}
-			?>
-		</pre>
+		
       <form method = "post" class="form-signin" role="form">
         <h2 class="form-signin-heading">Sign up Here</h2>
 		<input type="text" name="firstname" class="form-control" placeholder="First Name" required autofocus>

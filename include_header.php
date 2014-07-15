@@ -1,10 +1,13 @@
 <?php
 	session_start();
-	
+
+    require "code/vendor/autoload.php";
+    require "code/includes/database.php";
+
 	$title = 'Demogram';
-	
+
 	$filename = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME );
-	
+
 	$pages = array(
 		'trending' => 'Trending Photos',
 		'friends' => 'Friends Photos',
@@ -57,7 +60,7 @@
         </div>
         <div class="navbar-collapse collapse">
 		  <ul class="nav navbar-nav">
-            <li class="<?php echo ($filename === 'index') ? 'active' : ''; ?>"><a href="index.php">Home</a></li>				
+            <li class="<?php echo ($filename === 'index') ? 'active' : ''; ?>"><a href="index.php">Home</a></li>
             <li class="<?php echo ($filename === 'trending') ? 'active' : ''; ?>"><a href="trending.php">Trending</a></li>
             <li class="<?php echo ($filename === 'friends') ? 'active' : ''; ?>"><a href="friends.php">Friends</a></li>
 			<li class="<?php echo ($filename === 'categories') ? 'active' : ''; ?>"><a href="categories.php">Categories</a></li>

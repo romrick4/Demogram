@@ -1,18 +1,13 @@
 <?php
 	session_start();
 	require "code/vendor/autoload.php";
+    require "code/includes/database.php";
 	$post = $_POST;
 	
-	$options = array('driver' => 'mysqli',
-					'host' => 'localhost',
-					'user' => 'root',
-					'password' => '',
-					'database' => 'demogram',
-					'prefix' => ''
-					);
+
 				
 			if(isset($_POST['email'], $_POST['password'])){
-				$db = \Joomla\Database\DatabaseDriver::getInstance($options);
+
 				
 				
 				
@@ -33,9 +28,26 @@
 						if(password_verify($_POST['password'], $user->user_password)){
 							$_SESSION['logged_in_status'] = 1;
 							$_SESSION['user'] = $user;
+							header("Location: index.php");
 						}else{
 							$_SESSION['logged_in_status'] = 0;
-						}
+
+                            if($_SESSION['logged_in_status'] == 0){
+                                $_SESSION['message'] = '';
+                                $_SESSION['message'] .= '<div class="alert alert-danger" role="alert">';
+                                $_SESSION['message'] .= '<strong>Oops!</strong> Either your username or password are incorrect';
+                                $_SESSION['message'] .= '</div>';
+                                    if(isset($_SESSION["message"]))
+                                    {
+                                        echo $_SESSION["message"];
+                                        unset($_SESSION["message"]);
+                                    }
+                            }
+
+
+                        }
+
+
 					}
 				} catch(RuntimeException $e){
 					$e->getCode() . ' ' . $e->getMessage();
@@ -55,7 +67,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin to Demogram</title>
+    <title>Sign in to Demogram</title>
 
     <link rel="stylesheet" href="css/bootstrap.css">
 	<style>
@@ -79,17 +91,17 @@
   <body>
 
     <div class="container">
-	<pre><?php
-			if(isset($_SESSION['user'])){
+	<!--<pre><?php
+			/*if(isset($_SESSION['user'])){
 		echo print_r($_SESSION['user'], true);
 		}
-		/*if(function_exists("password_verify")){
+		if(function_exists("password_verify")){
 			echo "function exists";
 		}else{
 			echo "Function does not exist";
 		}*/
 			?>
-		</pre>
+		</pre>-->
       <form method="post" class="form-signin" role="form">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input name="email" type="email" class="form-control" placeholder="Email address" required autofocus>
