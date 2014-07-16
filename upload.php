@@ -105,6 +105,7 @@
         <?php else : ?>
 			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 				Your Photo: <input type="file" name="photo" size="25" />
+                <!--<input type="text" name="caption" class="form-control" placeholder="Caption" required autofocus>-->
 				<input type="submit" name="submit" value="Submit" />
 			</form>
         <?php endif; ?>

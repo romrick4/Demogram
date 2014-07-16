@@ -33,7 +33,13 @@
             ?>
             <?php if (!empty($photos)) : ?>
 			    <?php foreach ($photos as $photo) : ?>
-				    <img class="img-thumbnail" src="<?php echo $photo->photo_path . $photo->real_photo_name; ?>" style="width: 500px"/>
+				    <img id="photo_<?php echo $photo->photo_id;?>" class="img-thumbnail" src="<?php echo $photo->photo_path . $photo->real_photo_name; ?>" style="width: 500px"/>
+                    <div>
+                        <h4>
+                            <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=1" type="button" class="btn btn-sm btn-primary">Like</a>
+                            <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=-1" type="button" class="btn btn-sm btn-danger">Dislike</a>
+                        </h4>
+                    </div>
 			    <?php endforeach; ?>
             <?php endif; ?>
         </div>
