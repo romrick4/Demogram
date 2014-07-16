@@ -2,12 +2,8 @@
 session_start();
 
 if(isset($_SESSION['logged_in_status']) == 0){
-    header("location: " . $_SERVER['HTTP_REFERER']);
 
-    $_SESSION['message'] = '';
-    $_SESSION['message'] .= '<div class="alert alert-danger" role="alert">';
-    $_SESSION['message'] .= '<strong>Sorry!</strong> You must be logged in to like or dislike photos.';
-    $_SESSION['message'] .= '</div>';
+    echo '<strong>Sorry!</strong> You must be logged in to like or dislike photos.';
 
 }
 if(isset($_SESSION['logged_in_status']) == 1){
@@ -36,8 +32,10 @@ if(isset($_SESSION['logged_in_status']) == 1){
         $query->where('photo_id = ' . $db->quote($_GET['photo_id']));
         if($_GET['like_type'] == 1){
             $query->set('like_type = ' . $db->quote(1));
+            $outputstring = '<strong>Success!</strong> You have liked this photo.';
         }else{
             $query->set('like_type = ' . $db->quote(-1));
+            $outputstring = '<strong>Success!</strong> You have disliked this photo.';
         }
         $query->set('like_date = NOW()');
 
@@ -45,19 +43,13 @@ if(isset($_SESSION['logged_in_status']) == 1){
 
         try{
             $result = $db->execute();
-            header("location: " . $_SERVER['HTTP_REFERER']);
-            $_SESSION['message'] = '';
-            $_SESSION['message'] .= '<div class="alert alert-success" role="alert">';
-            $_SESSION['message'] .= '<strong>Success!</strong> Your rating has been updated.';
-            $_SESSION['message'] .= '</div>';
+            echo $outputstring;
+
 
         }
         catch(RuntimeException $e){
-            header("location: " . $_SERVER['HTTP_REFERER']);
-            $_SESSION['message'] = '';
-            $_SESSION['message'] .= '<div class="alert alert-danger" role="alert">';
-            $_SESSION['message'] .= '<strong>Sorry!</strong> Your rating was not recorded.';
-            $_SESSION['message'] .= '</div>';
+            echo '<strong>Sorry!</strong> Your rating was not recorded.';
+
 
         }
             }else{
@@ -69,8 +61,11 @@ if(isset($_SESSION['logged_in_status']) == 1){
                 $query->set('photo_id = ' . $db->quote($_GET['photo_id']));
                 if($_GET['like_type'] == 1){
                     $query->set('like_type = ' . $db->quote(1));
+                    $outputstring = '<strong>Success!</strong> You have liked this photo.';
+
                 }else{
                     $query->set('like_type = ' . $db->quote(-1));
+                    $outputstring = '<strong>Success!</strong> You have disliked this photo.';
                 }
                 $query->set('like_date = NOW()');
 
@@ -78,29 +73,23 @@ if(isset($_SESSION['logged_in_status']) == 1){
 
                 try{
                     $result = $db->execute();
-                    header("location: " . $_SERVER['HTTP_REFERER']);
-                    $_SESSION['message'] = '';
-                    $_SESSION['message'] .= '<div class="alert alert-success" role="alert">';
-                    $_SESSION['message'] .= '<strong>Success!</strong> Your rating has been recorded.';
-                    $_SESSION['message'] .= '</div>';
+
+                    echo $outputstring;
+
 
                 }
                 catch(RuntimeException $e){
-                    header("location: " . $_SERVER['HTTP_REFERER']);
-                    $_SESSION['message'] = '';
-                    $_SESSION['message'] .= '<div class="alert alert-danger" role="alert">';
-                    $_SESSION['message'] .= '<strong>Sorry!</strong> Your like was not recorded.';
-                    $_SESSION['message'] .= '</div>';
+
+                    echo '<strong>Sorry!</strong> Your like was not recorded.';
+
 
                 }
             }
         }
         catch(RuntimeException $e){
-            header("location: " . $_SERVER['HTTP_REFERER']);
-            $_SESSION['message'] = '';
-            $_SESSION['message'] .= '<div class="alert alert-danger" role="alert">';
-            $_SESSION['message'] .= '<strong>Sorry!</strong> Your like was not recorded.';
-            $_SESSION['message'] .= '</div>';
+
+            echo '<strong>Sorry!</strong> Your like was not recorded.';
+
 
         }
 

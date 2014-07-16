@@ -7,7 +7,7 @@ $(function() {
           cache: false,
           success: function(html){
             //$("#results").append(html);
-            $.bootstrapGrowl("Your rating was accepted");
+            $.bootstrapGrowl(html, { type: 'success' });
             }
         });
     });
@@ -19,7 +19,7 @@ $(function() {
           cache: false,
           success: function(html){
             //$("#results").append(html);
-            $.bootstrapGrowl("Your rating was accepted");
+            $.bootstrapGrowl(html, {type: 'danger'});
             }
         });
     });
