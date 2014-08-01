@@ -40,13 +40,15 @@ $query = $db->getQuery(true);
 			?>
             <?php if (!empty($photos)) : ?>
                 <?php foreach ($photos as $photo) : ?>
-                    <img id="photo_<?php echo $photo->photo_id;?>" class="img-thumbnail" src="<?php echo $photo->photo_path . $photo->real_photo_name; ?>" style="width: 500px"/>
+                    <div class="well" style="width: 700px">
+                    <img id="photo_<?php echo $photo->photo_id;?>" class="img-thumbnail" src="<?php echo $photo->photo_path . $photo->real_photo_name; ?>" style="width: 500px; box-shadow: 8px 8px 5px #888888;"/>
                     <div>
                         <h4>
                             <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=1" type="button" class="btn btn-sm btn-primary demogram_like">Like</a>
                             <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=-1" type="button" class="btn btn-sm btn-danger demogram_dislike">Dislike</a>
                         </h4>
                     </div>
+                        </div>
                 <?php endforeach; ?>
             <?php endif; ?>
 		</div>

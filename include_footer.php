@@ -3,6 +3,7 @@
 
       <footer>
         <p>&copy; Demogram 2014</p>
+          <p class="pull-right"><a href="#">Back to top</a></p>
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>

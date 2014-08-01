@@ -5,5 +5,5 @@ unset($_SESSION['logged_in_status']);
 if(isset($_SERVER)){
 	//echo print_r($_SERVER, true);
 }
-header("location: " . $_SERVER['HTTP_REFERER']);
+header("location: index.php");
 ?>

@@ -18,7 +18,7 @@
 					$valid_file = true;
 					//now is the time to modify the future file name and validate the file
 					$new_file_name = strtolower($_FILES['photo']['name']); //rename file
-					if($_FILES['photo']['size'] > (1024000)) //can't be larger than 1 MB
+					if($_FILES['photo']['size'] > (3000000)) //can't be larger than 1 MB
 					{
 						$valid_file = false;
 						$_SESSION['message'] = '';
@@ -103,11 +103,16 @@
                 You must be logged in to upload photos!
             </div>
         <?php else : ?>
+            <div class="well">
 			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
-				Your Photo: <input type="file" name="photo" size="25" />
-                <!--<input type="text" name="caption" class="form-control" placeholder="Caption" required autofocus>-->
-				<input type="submit" name="submit" value="Submit" />
+				<strong>Your Photo:</strong> <input type="file" name="photo" size="25" />
+                <input type="submit" name="submit" value="Submit">
 			</form>
+            </div>
+            <div class="well">
+            <h3><label>Give Your Photo a Title:</label></h3>
+                <textarea name="message" class="form-control textarea-box"></textarea>
+            </div>
         <?php endif; ?>
 		</div>
         <div class="col-md-2">
