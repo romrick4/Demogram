@@ -5,6 +5,21 @@
         <p>&copy; Demogram 2014</p>
           <p class="pull-right"><a href="#">Back to top</a></p>
       </footer>
+      <div class="modal fade" id="modal" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4>Edit Picture</h4>
+                  </div>
+                   <div class="modal-body">
+                       <p>Upload Picture</p>
+                   </div>
+                  <div class="modal-footer">
+                      <p>Save</p>
+                  </div>
+              </div>
+          </div>
+      </div>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
 

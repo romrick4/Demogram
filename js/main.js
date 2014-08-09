@@ -48,3 +48,9 @@ $(function() {
                     });
                 }, 3000);*/
 });
+
+$('#basicModal').modal(options);
+
+var options = {
+    "backdrop" : "static"
+}

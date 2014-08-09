@@ -10,7 +10,7 @@
           <h2>Upload Photos</h2>
           <?php
 			//if they DID upload a file...
-			if(isset($_FILES['photo']['name']))
+			if(isset($_FILES['photo']['name']) && isset($_POST['caption']))
 			{
 				//if no errors...
 				if(!$_FILES['photo']['error'])
@@ -41,6 +41,7 @@
                         $photo_filetype = $photo_parts['extension'];
                         $photo_filename = $photo_parts['filename'];
                         $photo_path = $base_path . $photo_filename[0] . '/';
+                        $photo_caption = $_POST['caption'];
 
                         // Create Insert Query
                         $query = $db->getQuery(true);
@@ -51,6 +52,7 @@
                         $query->set('photo_filename = ' . $db->quote($photo_filename));
                         $query->set('photo_filetype = ' . $db->quote($photo_filetype));
                         $query->set('photo_added_on_date = NOW()');
+                        $query->set('photo_caption = ' . $db->quote($photo_caption));
 
                         $db->setQuery($query);
 
@@ -68,6 +70,7 @@
                                 $_SESSION['message'] .= '<div class="alert alert-success" role="alert">';
                                     $_SESSION['message'] .= '<strong>Congratulations!</strong> Your file was accepted.';
                                 $_SESSION['message'] .= '</div>';
+                                echo $photo_caption;
                             }
                         } catch (Exception $e) {
                             $_SESSION['message'] = '';
@@ -106,13 +109,18 @@
             <div class="well">
 			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 				<strong>Your Photo:</strong> <input type="file" name="photo" size="25" />
-                <input type="submit" name="submit" value="Submit">
+                <form method = "post" class="form-control" role="form">
+                    <h3><label>Give Your Photo a Title:</label></h3>
+                    <input type="text" name="caption" class="form-control" placeholder="Title" required autofocus>
+                    <input type="submit" name="submit" value="Submit">
+                    </form>
+
 			</form>
             </div>
-            <div class="well">
+            <!--<div class="well">
             <h3><label>Give Your Photo a Title:</label></h3>
                 <textarea name="message" class="form-control textarea-box"></textarea>
-            </div>
+            </div>-->
         <?php endif; ?>
 		</div>
         <div class="col-md-2">

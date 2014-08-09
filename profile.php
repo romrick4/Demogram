@@ -1,5 +1,7 @@
 <?php include 'include_header.php'; ?>
+<?php
 
+?>
 
 
 
@@ -75,7 +77,7 @@
                                 <p>
                                     <i class="glyphicon glyphicon-envelope"></i><?php echo $_SESSION['user']->user_email; ?>
                                     <br />
-                                    <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a><a class="editForm"  href="#" rel="async-post"> Edit</a>
+                                    <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a><a class="editForm"  href="#modal" data-toggle="modal0" rel="async-post"> Edit</a>
                                     <br />
                                     <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
                                 <!-- Split button -->
@@ -93,7 +95,7 @@
                                         <li><a href="#">Github</a></li>
                                     </ul>
                                 </div>-->
-                                <a href="signin.php" class="btn btn-success">Follow</a>
+                                <a href="#modal" data-toggle="modal" class="btn btn-success">Modal</a>
                             </div>
                         </div>
                     </div>

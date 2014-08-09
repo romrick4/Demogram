@@ -19,8 +19,10 @@
                 $query = $db->getQuery(true);
 
                 $query->select("p.*, CONCAT(p.photo_id, '_', p.photo_name) real_photo_name");
+                $query->select("p.*, photo_caption");
                 $query->from('#__photos p');
                 $query->order('p.photo_id DESC');
+                $query->order('p.photo_caption');
 
                 $db->setQuery($query);
 
@@ -34,11 +36,12 @@
             <?php if (!empty($photos)) : ?>
 			    <?php foreach ($photos as $photo) : ?>
                     <div class="well" style="width: 700px">
+                        <h3><strong><?php echo $photo->photo_caption ?></strong></h3>
 				    <img id="photo_<?php echo $photo->photo_id;?>" class="img-thumbnail" src="<?php echo $photo->photo_path . $photo->real_photo_name; ?>" style="width: 500px; box-shadow: 8px 8px 5px #888888;"/>
                     <div>
                         <h4>
-                            <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=1" type="button" class="btn btn-sm btn-primary demogram_like">Like</a>
-                            <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=-1" type="button" class="btn btn-sm btn-danger demogram_dislike">Dislike</a>
+                            <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=1" type="button" style="box-shadow: 4px 4px 5px #888888;" class="btn btn-xs btn-primary demogram_like">Like</a>
+                            <a href="likes.php?photo_id=<?php echo $photo->photo_id; ?>&amp;like_type=-1" type="button" style="box-shadow: 4px 4px 5px #888888;" class="btn btn-xs btn-danger demogram_dislike">Dislike</a>
                         </h4>
                     </div>
                     </div>
