@@ -5,17 +5,45 @@
         <p>&copy; Demogram 2014</p>
           <p class="pull-right"><a href="#">Back to top</a></p>
       </footer>
-      <div class="modal fade" id="modal" role="dialog">
+      <div class="modal fade" id="comment_modal" role="dialog">
           <div class="modal-dialog">
               <div class="modal-content">
                   <div class="modal-header">
-                      <h4>Edit Picture</h4>
+                      <h4>Comments</h4>
                   </div>
                    <div class="modal-body">
-                       <p>Upload Picture</p>
+                       <p>
+                           <?php
+                           if(isset($_POST['comment'])){
+
+                               $query = $db->getQuery(true);
+
+                               $query->insert('#__comments');
+                               $query->set('comment = ' . $db->quote($_POST['comment']));
+                               $query->set('comment_writer = ' . $db->quote($_SESSION['user']->user_username));
+
+                               $db->setQuery($query);
+
+                               try{
+                                   $result = $db->execute();
+
+                                   if($result){
+                                       echo $_POST['comment'];
+                                   }
+                               } catch(RuntimeException $e){
+                                   $e->getCode() . ' ' . $e->getMessage();
+                               }
+                           }
+                           ?>
+
+
+                       </p>
                    </div>
                   <div class="modal-footer">
-                      <p>Save</p>
+                      <form method = "post" role="form">
+                          <input type="text" name="comment" class="form-control" placeholder="Type a comment..." required autofocus>
+                          <input type="submit" name="submit" value="Submit" class="btn btn-xs btn-default">
+                      </form>
                   </div>
               </div>
           </div>

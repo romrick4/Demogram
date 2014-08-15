@@ -111,7 +111,7 @@
 
         <div class="featurette">
             <img class="featurette-image img-circle pull-right" src="http://placehold.it/512">
-            <h2 class="featurette-heading">Responsive Design. <span class="text-muted">It'll blow your mind.</span></h2>
+            <h2 class="featurette-heading">This page is still a work in progress! <span class="text-muted">This page is the user profile and is not functional at all yet.</span></h2>
             <p class="lead">In simple terms, a responsive web design figures out what resolution of device it's being served on. Flexible grids then size correctly to fit the screen.</p>
         </div>
 

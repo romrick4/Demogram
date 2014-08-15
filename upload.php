@@ -13,7 +13,7 @@
 			if(isset($_FILES['photo']['name']) && isset($_POST['caption']))
 			{
 				//if no errors...
-				if(!$_FILES['photo']['error'])
+				if(!$_FILES['photo']['error'] && (($_FILES['photo']['type'] == "image/gif") || ($_FILES['photo']['type'] == "image/jpeg") || ($_FILES['photo']['type'] == "image/jpg") || ($_FILES['photo']['type'] == "image/png")))
 				{
 					$valid_file = true;
 					//now is the time to modify the future file name and validate the file
